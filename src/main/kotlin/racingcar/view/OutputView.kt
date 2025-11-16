@@ -1,8 +1,8 @@
 package racingcar.view
 
-import racingcar.model.dto.CarRecord
-import racingcar.model.dto.RaceRecord
-import racingcar.model.dto.RoundRecord
+import racingcar.model.dto.CarSnapshot
+import racingcar.model.dto.RaceSnapshot
+import racingcar.model.dto.RoundSnapshot
 import racingcar.model.dto.Winners
 
 class OutputView {
@@ -15,10 +15,10 @@ class OutputView {
         println("시도할 횟수는 몇 회인가요?")
     }
 
-    fun printRaceRecord(raceRecord: RaceRecord) {
+    fun printRaceResult(raceSnapshot: RaceSnapshot) {
         val stringBuilder = StringBuilder()
         appendExecutionResultPrompt(stringBuilder)
-        buildRaceRecord(raceRecord, stringBuilder)
+        buildRaceSnapshot(raceSnapshot, stringBuilder)
         print(stringBuilder)
     }
 
@@ -29,22 +29,23 @@ class OutputView {
             .append(System.lineSeparator())
     }
 
-    private fun buildRaceRecord(raceRecord: RaceRecord, stringBuilder: StringBuilder) {
-        raceRecord.roundRecords
-            .forEach { roundRecord -> buildRoundRecord(roundRecord, stringBuilder) }
+    private fun buildRaceSnapshot(raceSnapshot: RaceSnapshot, stringBuilder: StringBuilder) {
+        raceSnapshot.roundSnapshots
+            .forEach { roundSnapshot -> buildRoundSnapshot(roundSnapshot, stringBuilder) }
     }
 
-    private fun buildRoundRecord(roundRecord: RoundRecord, stringBuilder: StringBuilder) {
-        roundRecord.carRecords
-            .forEach { carRecord -> buildCarRecord(carRecord, stringBuilder) }
+    private fun buildRoundSnapshot(roundSnapshot: RoundSnapshot, stringBuilder: StringBuilder) {
+        roundSnapshot.carSnapshots
+            .forEach { carSnapshot -> buildCarSnapshot(carSnapshot, stringBuilder) }
+
         stringBuilder.append(System.lineSeparator())
     }
 
-    private fun buildCarRecord(carRecord: CarRecord, stringBuilder: StringBuilder) {
+    private fun buildCarSnapshot(carSnapshot: CarSnapshot, stringBuilder: StringBuilder) {
         stringBuilder
-            .append(carRecord.name)
+            .append(carSnapshot.name)
             .append(NAME_DISTANCE_SEPARATOR)
-            .append(POSITION_MARK.repeat(carRecord.position))
+            .append(POSITION_MARK.repeat(carSnapshot.position))
             .append(System.lineSeparator())
     }
 

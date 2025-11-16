@@ -58,7 +58,7 @@ class RaceTest {
         val raceRecord = race.start()
 
         // then
-        assertThat(raceRecord.roundRecords.size).isEqualTo(3)
+        assertThat(raceRecord.roundSnapshots.size).isEqualTo(3)
         assertThat(race.winners().names).containsExactly("car1", "car2")
     }
 }

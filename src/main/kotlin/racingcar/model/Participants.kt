@@ -1,7 +1,7 @@
 package racingcar.model
 
 import racingcar.error.ErrorCode
-import racingcar.model.dto.CarRecord
+import racingcar.model.dto.CarSnapshot
 import racingcar.model.dto.Winners
 
 class Participants(private val participants: List<Car>) {
@@ -37,7 +37,7 @@ class Participants(private val participants: List<Car>) {
         return Winners(furthest)
     }
 
-    fun records(): List<CarRecord> {
+    fun records(): List<CarSnapshot> {
         return participants
             .stream()
             .map(Car::record)

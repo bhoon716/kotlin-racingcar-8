@@ -19,7 +19,6 @@ class RaceController(private val inputView: InputView, private val outputView: O
 
     private fun setUpRace(): Race {
         val cars = setUpCars()
-
         val trialCount = setUpTrialCount()
         val race = Race(trialCount, Participants(cars))
         return race
@@ -46,8 +45,8 @@ class RaceController(private val inputView: InputView, private val outputView: O
     }
 
     private fun start(race: Race) {
-        val raceRecord = race.start()
-        outputView.printRaceRecord(raceRecord)
+        val result = race.start()
+        outputView.printRaceResult(result)
     }
 
     private fun printWinner(race: Race) {
