@@ -18,7 +18,8 @@ class CarTest {
         strings = [
             "pobi",
             "a123",
-            "123"
+            "123",
+            "가나다1"
         ]
     )
     fun carTest(name: String) {
