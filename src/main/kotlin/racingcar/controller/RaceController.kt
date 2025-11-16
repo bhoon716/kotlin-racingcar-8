@@ -10,20 +10,48 @@ import racingcar.view.OutputView
 class RaceController(private val inputView: InputView, private val outputView: OutputView) {
 
     fun run() {
-        outputView.printEnterCarNamesPrompt()
-        val carNames = inputView.readCarNames()
+        val race = setUpRace()
 
-        val cars = carNames.split(",")
+        start(race)
+
+        printWinner(race)
+    }
+
+    private fun setUpRace(): Race {
+        val cars = setUpCars()
+
+        val trialCount = setUpTrialCount()
+        val race = Race(trialCount, Participants(cars))
+        return race
+    }
+
+    private fun setUpCars(): List<Car> {
+        val carNames = readCarNames()
+        return generateCars(carNames)
+    }
+
+    private fun generateCars(carNames: String): List<Car> =
+        carNames.split(",")
             .map { name -> Car(name, RandomMoveStrategy()) }
             .toList()
 
+    private fun readCarNames(): String {
+        outputView.printEnterCarNamesPrompt()
+        return inputView.readCarNames()
+    }
+
+    private fun setUpTrialCount(): Int {
         outputView.printTrialCountPrompt()
-        val trialCount = inputView.readTrialCount()
-        val race = Race(trialCount, Participants(cars))
+        return inputView.readTrialCount()
+    }
 
+    private fun start(race: Race) {
         val raceRecord = race.start()
-        val winners = race.winners()
-
         outputView.printRaceRecord(raceRecord)
+    }
+
+    private fun printWinner(race: Race) {
+        val winners = race.winners()
+        outputView.printWinners(winners)
     }
 }

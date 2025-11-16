@@ -3,6 +3,7 @@ package racingcar.view
 import racingcar.model.dto.CarRecord
 import racingcar.model.dto.RaceRecord
 import racingcar.model.dto.RoundRecord
+import racingcar.model.dto.Winners
 
 class OutputView {
 
@@ -18,7 +19,7 @@ class OutputView {
         val stringBuilder = StringBuilder()
         appendExecutionResultPrompt(stringBuilder)
         buildRaceRecord(raceRecord, stringBuilder)
-        println(stringBuilder)
+        print(stringBuilder)
     }
 
     private fun appendExecutionResultPrompt(stringBuilder: StringBuilder) {
@@ -33,14 +34,13 @@ class OutputView {
             .forEach { roundRecord -> buildRoundRecord(roundRecord, stringBuilder) }
     }
 
-    fun buildRoundRecord(roundRecord: RoundRecord, stringBuilder: StringBuilder) {
+    private fun buildRoundRecord(roundRecord: RoundRecord, stringBuilder: StringBuilder) {
         roundRecord.carRecords
-            .forEach { carRecord -> stringBuilder.append(buildCarRecord(carRecord, stringBuilder)) }
+            .forEach { carRecord -> buildCarRecord(carRecord, stringBuilder) }
         stringBuilder.append(System.lineSeparator())
     }
 
-    fun buildCarRecord(carRecord: CarRecord, stringBuilder: StringBuilder) {
-
+    private fun buildCarRecord(carRecord: CarRecord, stringBuilder: StringBuilder) {
         stringBuilder
             .append(carRecord.name)
             .append(NAME_DISTANCE_SEPARATOR)
@@ -48,8 +48,13 @@ class OutputView {
             .append(System.lineSeparator())
     }
 
+    fun printWinners(winners: Winners) {
+        println("최종 우승자 : " + winners.names.joinToString(WINNER_NAME_SEPARATOR))
+    }
+
     companion object {
         private const val NAME_DISTANCE_SEPARATOR = " : "
         private const val POSITION_MARK = "-"
+        private const val WINNER_NAME_SEPARATOR = ", "
     }
 }
