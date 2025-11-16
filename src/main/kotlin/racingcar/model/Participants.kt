@@ -6,10 +6,17 @@ import racingcar.model.dto.CarRecord
 class Participants(private val participants: List<Car>) {
 
     init {
-        validate(participants)
+        validateParticipantsCount(participants)
+        validateDuplicatedName(participants)
     }
 
-    private fun validate(participants: List<Car>) {
+    private fun validateParticipantsCount(participants: List<Car>) {
+        if (participants.size < 2 || participants.size > 10) {
+            throw IllegalArgumentException(ErrorCode.OUT_OF_RANGE_PARTICIPANTS_COUNT.message())
+        }
+    }
+
+    private fun validateDuplicatedName(participants: List<Car>) {
         val names = participants.map { it.name }
         if (names.toSet().size != participants.size) {
             throw IllegalArgumentException(ErrorCode.DUPLICATED_CAR_NAME.message())
