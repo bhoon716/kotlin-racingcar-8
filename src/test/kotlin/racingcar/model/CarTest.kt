@@ -1,6 +1,9 @@
 package racingcar.model
 
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatCode
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -25,7 +28,7 @@ class CarTest {
     fun carTest(name: String) {
         // given
         // when & then
-        Assertions.assertThatCode { Car(name, mustMove) }.doesNotThrowAnyException()
+        assertThatCode { Car(name, mustMove) }.doesNotThrowAnyException()
     }
 
     @DisplayName("차 생성 실패 - 잘못된 이름")
@@ -41,21 +44,23 @@ class CarTest {
     fun invalidCarNameTest(name: String) {
         // given
         // when & then
-        Assertions.assertThatThrownBy { Car(name, mustMove) }
+        assertThatThrownBy { Car(name, mustMove) }
             .isExactlyInstanceOf(IllegalArgumentException::class.java)
             .hasMessage(ErrorCode.INVALID_CAR_NAME.message())
     }
 
-    @DisplayName("차 이동 테스트")
+    @DisplayName("차 이동 및 비교 테스트")
     @Test
     fun moveTest() {
         // given
-        val car = Car("car1", mustMove)
+        val car1 = Car("car1", mustMove)
+        val car2 = Car("car2", mustMove)
 
         // when
-        car.tryToMove()
+        car1.tryToMove()
+        car2.tryToMove()
 
         // then
-
+        assertThat(car1.compareTo(car2)).isEqualTo(0)
     }
 }

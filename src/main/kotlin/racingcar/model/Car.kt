@@ -5,12 +5,8 @@ import racingcar.model.strategy.MoveStrategy
 
 class Car(name: String, private val moveStrategy: MoveStrategy) : Comparable<Car> {
 
-    private val name: String
+    val name: String
     private var position: Int = DEFAULT_POSITION
-
-    companion object {
-        const val DEFAULT_POSITION = 0
-    }
 
     init {
         val trimmed = name.trim()
@@ -32,6 +28,10 @@ class Car(name: String, private val moveStrategy: MoveStrategy) : Comparable<Car
     }
 
     override fun compareTo(other: Car): Int {
-        TODO("Not yet implemented")
+        return other.position.compareTo(this.position)
+    }
+
+    private companion object CONSTANT {
+        private const val DEFAULT_POSITION = 0
     }
 }
