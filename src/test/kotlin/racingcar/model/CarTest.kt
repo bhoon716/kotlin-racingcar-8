@@ -1,9 +1,6 @@
 package racingcar.model
 
-import org.assertj.core.api.Assertions
-import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatCode
-import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -62,5 +59,6 @@ class CarTest {
 
         // then
         assertThat(car1.compareTo(car2)).isEqualTo(0)
+        assertThat(car1.record().position).isEqualTo(1)
     }
 }

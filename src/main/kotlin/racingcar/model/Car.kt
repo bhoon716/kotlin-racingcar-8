@@ -1,6 +1,7 @@
 package racingcar.model
 
 import racingcar.error.ErrorCode
+import racingcar.model.dto.CarRecord
 import racingcar.model.strategy.MoveStrategy
 
 class Car(name: String, private val moveStrategy: MoveStrategy) : Comparable<Car> {
@@ -25,6 +26,10 @@ class Car(name: String, private val moveStrategy: MoveStrategy) : Comparable<Car
         if (moveStrategy.canMove()) {
             position++
         }
+    }
+
+    fun record(): CarRecord {
+        return CarRecord(name, position)
     }
 
     override fun compareTo(other: Car): Int {
