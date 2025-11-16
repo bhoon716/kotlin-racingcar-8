@@ -74,4 +74,20 @@ class ParticipantsTest {
                 assertThat(participant.position).isEqualTo(1)
             }
     }
+
+    @DisplayName("가장 멀리간 자동차 판별 테스트")
+    @Test
+    fun furthestTest() {
+        // given
+        val car1 = Car("car1") { true }
+        val car2 = Car("car2") { true }
+        val car3 = Car("car3") { false }
+        val participants = Participants(listOf(car1, car2, car3))
+
+        // when
+        participants.tryToMoveAll()
+
+        // then
+        assertThat(participants.furthest().names).containsExactly("car1", "car2")
+    }
 }
