@@ -1,5 +1,6 @@
 package racingcar.model
 
+import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatCode
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.DisplayName
@@ -42,5 +43,22 @@ class RaceTest {
         assertThatThrownBy { Race(trialCount, participants) }
             .isExactlyInstanceOf(IllegalArgumentException::class.java)
             .hasMessage(ErrorCode.OUT_OF_RANCE_TRIAL_COUNT.message())
+    }
+
+    @DisplayName("3회 경주 테스트")
+    @Test
+    fun raceStartTest() {
+        // given
+        val car1 = Car("car1") { true }
+        val car2 = Car("car2") { true }
+        val car3 = Car("car3") { false }
+        val race =Race(3, Participants(listOf(car1, car2, car3)))
+
+        // when
+        val raceRecord = race.start()
+
+        // then
+        assertThat(raceRecord.roundRecords.size).isEqualTo(3)
+        assertThat(race.winners().names).containsExactly("car1", "car2")
     }
 }
