@@ -2,6 +2,7 @@ package racingcar.model
 
 import racingcar.error.ErrorCode
 import racingcar.model.dto.CarRecord
+import racingcar.model.dto.Winners
 
 class Participants(private val participants: List<Car>) {
 
@@ -25,6 +26,15 @@ class Participants(private val participants: List<Car>) {
 
     fun tryToMoveAll() {
         participants.forEach(Car::tryToMove)
+    }
+
+    fun furthest(): Winners {
+        val first = participants.max()
+        val furthest = participants
+            .filter { car -> first.compareTo(car) == 0 }
+            .map { car -> car.name }
+            .toList()
+        return Winners(furthest)
     }
 
     fun records(): List<CarRecord> {

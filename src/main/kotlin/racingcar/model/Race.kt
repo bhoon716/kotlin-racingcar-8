@@ -3,6 +3,7 @@ package racingcar.model
 import racingcar.error.ErrorCode
 import racingcar.model.dto.RaceRecord
 import racingcar.model.dto.RoundRecord
+import racingcar.model.dto.Winners
 
 class Race(private val trialCount:Int, private val participants: Participants) {
 
@@ -18,12 +19,14 @@ class Race(private val trialCount:Int, private val participants: Participants) {
 
     fun start(): RaceRecord {
         var raceRecord = RaceRecord()
-
         for(round in 1 .. trialCount) {
             participants.tryToMoveAll()
             raceRecord += RoundRecord(round, participants.records())
-
         }
         return raceRecord
+    }
+
+    fun winners(): Winners {
+        return participants.furthest()
     }
 }
