@@ -33,7 +33,7 @@ class Car(name: String, private val moveStrategy: MoveStrategy) : Comparable<Car
     }
 
     override fun compareTo(other: Car): Int {
-        return other.position.compareTo(this.position)
+        return this.position.compareTo(other.position)
     }
 
     private companion object CONSTANT {
