@@ -3,13 +3,25 @@
 > 자동차 이름과 시도 횟수를 입력하면, 자동차 경주를 진행하고 승자의 이름을 출력하는 콘솔 애플리케이션
 
 ### 실행 방법
-```shell
+
+1. 해당 Github 저장소를 클론한다.
+```bash
 git clone https://github.com/bhoon716/kotlin-racingcar-8
-
-cd kotlin-racingcar-8
-
-./gradlew clean build
 ```
+2. IDE를 이용하여 해당 프로젝트를 연다.
+
+3. Java 버전을 확인하고, gradle 테스트를 진행하여 결과가 아래와 같이 나오는지 확인한다.
+```bash
+java -version    # 버전이 21인지 확인
+
+./gradlew clean test    # Mac
+gradlew.bat clean test  # Windows
+```
+```bash
+BUILD SUCCESSFUL in 0s
+```
+
+4. `Application.kt`의 main 함수를 실행한다.
 
 ## 실행 과정
 
