@@ -29,10 +29,11 @@ class RaceController(private val inputView: InputView, private val outputView: O
         return generateCars(carNames)
     }
 
-    private fun generateCars(carNames: String): List<Car> =
-        carNames.split(",")
+    private fun generateCars(carNames: String): List<Car> {
+        return carNames.split(CAR_NAME_DELIMITER)
             .map { name -> Car(name, RandomMoveStrategy()) }
             .toList()
+    }
 
     private fun readCarNames(): String {
         outputView.printEnterCarNamesPrompt()
@@ -52,5 +53,9 @@ class RaceController(private val inputView: InputView, private val outputView: O
     private fun printWinner(race: Race) {
         val winners = race.winners()
         outputView.printWinners(winners)
+    }
+
+    private companion object CONSTANT {
+        private const val CAR_NAME_DELIMITER = ","
     }
 }

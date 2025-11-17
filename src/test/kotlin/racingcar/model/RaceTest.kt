@@ -1,8 +1,6 @@
 package racingcar.model
 
-import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatCode
-import org.assertj.core.api.Assertions.assertThatThrownBy
+import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.params.ParameterizedTest
@@ -52,7 +50,7 @@ class RaceTest {
         val car1 = Car("car1") { true }
         val car2 = Car("car2") { true }
         val car3 = Car("car3") { false }
-        val race =Race(3, Participants(listOf(car1, car2, car3)))
+        val race = Race(3, Participants(listOf(car1, car2, car3)))
 
         // when
         val raceRecord = race.start()

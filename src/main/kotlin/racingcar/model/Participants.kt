@@ -12,7 +12,7 @@ class Participants(private val participants: List<Car>) {
     }
 
     private fun validateParticipantsCount(participants: List<Car>) {
-        if (participants.size < 2 || participants.size > 10) {
+        if (participants.size < MINIMUM_PARTICIPANT_COUNT || participants.size > MAXIMUM_PARTICIPANT_COUNT) {
             throw IllegalArgumentException(ErrorCode.OUT_OF_RANGE_PARTICIPANTS_COUNT.message())
         }
     }
@@ -42,5 +42,10 @@ class Participants(private val participants: List<Car>) {
             .stream()
             .map(Car::record)
             .toList()
+    }
+
+    private companion object CONSTANT {
+        private const val MINIMUM_PARTICIPANT_COUNT = 2
+        private const val MAXIMUM_PARTICIPANT_COUNT = 10
     }
 }

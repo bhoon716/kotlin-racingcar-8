@@ -53,7 +53,7 @@ class OutputView {
         println("최종 우승자 : " + winners.names.joinToString(WINNER_NAME_SEPARATOR))
     }
 
-    companion object {
+    private companion object CONSTANT {
         private const val NAME_DISTANCE_SEPARATOR = " : "
         private const val POSITION_MARK = "-"
         private const val WINNER_NAME_SEPARATOR = ", "

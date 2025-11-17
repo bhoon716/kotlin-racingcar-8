@@ -16,8 +16,7 @@ class Car(name: String, private val moveStrategy: MoveStrategy) : Comparable<Car
     }
 
     private fun validateName(name: String) {
-        val regex = "(^[a-zA-Z가-힣0-9]{1,5}$)".toRegex()
-        if(!name.matches(regex)) {
+        if (!name.matches(CAR_NAME_REGEX)) {
             throw IllegalArgumentException(ErrorCode.INVALID_CAR_NAME.message())
         }
     }
@@ -38,5 +37,6 @@ class Car(name: String, private val moveStrategy: MoveStrategy) : Comparable<Car
 
     private companion object CONSTANT {
         private const val DEFAULT_POSITION = 0
+        private val CAR_NAME_REGEX = "(^[a-zA-Z가-힣0-9]{1,5}$)".toRegex()
     }
 }
